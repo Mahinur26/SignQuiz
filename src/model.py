@@ -129,7 +129,7 @@ class DETR(nn.Module):
     def load_pretrained(self, checkpoint_path: str):
         """Load pretrained weights with logging."""
         try:
-            self.load_state_dict(torch.load(checkpoint_path))
+            self.load_state_dict(torch.load(checkpoint_path, weights_only=False))
             self.model_handler.log_model_loading(checkpoint_path, success=True)
         except Exception as e:
             self.logger.error(f"Failed to load checkpoint: {str(e)}")
