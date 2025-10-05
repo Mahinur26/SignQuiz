@@ -26,7 +26,7 @@ transforms = A.Compose(
         ]
     )
 
-model = DETR(num_classes=3)
+model = DETR(num_classes=19)
 model.eval()
 model.load_pretrained('pretrained/4426_model.pt')
 CLASSES = get_classes() 
