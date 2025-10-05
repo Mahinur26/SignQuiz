@@ -23,9 +23,27 @@ if __name__ == '__main__':
 
     num_classes = 19 
     model = DETR(num_classes=num_classes)
-    model.load_pretrained('pretrained/4426_model.pt')
+
+    # --- Load pretrained weights but skip old classification head ---
+    checkpoint_path = 'pretrained/4426_model.pt'
+    try:
+        checkpoint = torch.load(checkpoint_path, map_location='cpu')
+
+        # Remove incompatible keys (classifier from old model)
+        for key in list(checkpoint.keys()):
+            if "linear_class" in key or "class_embed" in key:
+                print(f" Skipping pretrained layer: {key}")
+                del checkpoint[key]
+
+        missing, unexpected = model.load_state_dict(checkpoint, strict=False)
+        print(f"Loaded pretrained weights (except classifier). Missing: {missing}, Unexpected: {unexpected}")
+
+    except Exception as e:
+        print(f"Could not load pretrained weights: {e}")
+
     model.log_model_info()
-    model.train() 
+    model.train()
+
 
     opt = optim.Adam(model.parameters(), lr=1e-5)
     scheduler = optim.lr_scheduler.CosineAnnealingWarmRestarts(opt, len(train_dataloader)*30, T_mult=2)

@@ -1,0 +1,6 @@
+2025-10-04 18:34:44,892 - model - ERROR - [error]Failed to load checkpoint: Error(s) in loading state_dict for DETR:
+	size mismatch for linear_class.weight: copying a param with shape torch.Size([4, 256]) from checkpoint, the shape in current model is torch.Size([20, 256]).
+	size mismatch for linear_class.bias: copying a param with shape torch.Size([4]) from checkpoint, the shape in current model is torch.Size([20]).[/error]
+2025-10-04 18:36:50,001 - model - ERROR - [error]Failed to load checkpoint: Error(s) in loading state_dict for DETR:
+	size mismatch for linear_class.weight: copying a param with shape torch.Size([4, 256]) from checkpoint, the shape in current model is torch.Size([20, 256]).
+	size mismatch for linear_class.bias: copying a param with shape torch.Size([4]) from checkpoint, the shape in current model is torch.Size([20]).[/error]
